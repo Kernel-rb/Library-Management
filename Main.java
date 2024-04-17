@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class Main {
     static Database database;
     static Scanner input;
+    static boolean loggedIn = false;
 
-    // bach ncolori output
+    // !bach nchanger les colr dyal output 
     public static final String ANSI_CUSTOM = "\u001B[38;5;208m"; // Orange 
     public static final String ANSI_RESET = "\u001B[0m"; // RESET
     public static final String ANSI_RED = "\u001B[31m"; // RED
@@ -16,15 +17,17 @@ public class Main {
 
         int choice;
         do {
-            System.out.println("**********************************************");
-            System.out.println("*  " + ANSI_CUSTOM + "Welcome to the Library Management System" + ANSI_RESET + "  *");
-            System.out.println("*            Version: " + ANSI_CUSTOM + "0.0.1" + ANSI_RESET + "                  *");
-            System.out.println("*         Author: " + ANSI_CUSTOM + "Kernel.rb" + ANSI_RESET + "                  *");
-            System.out.println("**********************************************");
-            System.out.println("1. Login");
-            System.out.println("2. Register");  
-            System.out.println("3. Exit");
-            System.out.println("");
+            if (!loggedIn) {
+                System.out.println("**********************************************");
+                System.out.println("*  " + ANSI_CUSTOM + "Welcome to the Library Management System" + ANSI_RESET + "  *");
+                System.out.println("*            Version: " + ANSI_CUSTOM + "0.0.1" + ANSI_RESET + "                  *");
+                System.out.println("*         Author: " + ANSI_CUSTOM + "Kernel.rb" + ANSI_RESET + "                  *");
+                System.out.println("**********************************************");
+                System.out.println("1. Login");
+                System.out.println("2. Register");  
+                System.out.println("3. Exit");
+                System.out.println("");
+            }
 
             choice = input.nextInt();
             switch (choice) {
@@ -57,6 +60,7 @@ public class Main {
             User user = database.getUser(loginStatus);
             System.out.println(ANSI_GREEN + "Welcome, " + user.getUsername() + "!" + ANSI_RESET);
             user.menu();
+            loggedIn = true; // Set the flag to true after successful login
         } else {
             System.out.println(ANSI_RED + "Invalid username or password." + ANSI_RESET);
             System.exit(0);
@@ -85,7 +89,7 @@ public class Main {
 
         System.out.println("1. Admin \n2. User");
         int userType = input.nextInt();
-        User user ;
+        User user;
         if (userType == 1) {
             user  = new Admin(username, email, phoneNumber, password);
             database.addUser(user);
@@ -96,6 +100,7 @@ public class Main {
             System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
         }
         user.menu();
+        loggedIn = true; 
     }
 
     private static boolean checkPassword(String password, String password2) {
