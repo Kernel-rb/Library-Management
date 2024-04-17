@@ -1,7 +1,5 @@
 package src;
 import java.util.Scanner;
-import src.User;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -76,7 +74,7 @@ public class Main {
             User user = database.getUser(loginStatus);
             System.out.println(ANSI_GREEN + "Welcome, " + user.getUsername() + "!" + ANSI_RESET);
             user.menu();
-            loggedIn = true; // Set the flag to true after successful login
+            loggedIn = true; 
         } else {
             System.out.println(ANSI_RED + "Invalid username or password." + ANSI_RESET);
             System.exit(0);
