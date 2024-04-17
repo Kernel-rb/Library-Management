@@ -1,97 +1,113 @@
 import java.util.Scanner;
 
 public class Main {
-  static Database database;
-  public static void main(String[] args){
+    static Database database;
+    static Scanner input;
 
-    database = new Database();
-    int choice; 
-    do{
-      
-      System.out.println("Welcome to Library Management System \n" + 
-      "1. Login \n" +
-      "2. Register \n" +
-      "0. Exit \n" +
-      ""
-      );
+    // bach ncolori output
+    public static final String ANSI_CUSTOM = "\u001B[38;5;208m"; // Orange 
+    public static final String ANSI_RESET = "\u001B[0m"; // RESET
+    public static final String ANSI_RED = "\u001B[31m"; // RED
+    public static final String ANSI_GREEN = "\u001B[32m"; // GREEN
 
-      Scanner input = new Scanner(System.in);
-      choice = input.nextInt();
-      switch(choice){
-        case 1:
-          login();
-          break;
-        case 2:
-          register();
-          break;
-        case 0:
-          System.out.println("Goodbye");
-          System.exit(0);
-          break;
-        default:
-          System.out.println("Invalid choice");
-          break;
-      }
-    } while(choice != 0);
+    public static void main(String[] args) {
+        database = new Database();
+        input = new Scanner(System.in);
 
+        int choice;
+        do {
+            System.out.println("**********************************************");
+            System.out.println("*  " + ANSI_CUSTOM + "Welcome to the Library Management System" + ANSI_RESET + "  *");
+            System.out.println("*            Version: " + ANSI_CUSTOM + "0.0.1" + ANSI_RESET + "                  *");
+            System.out.println("*         Author: " + ANSI_CUSTOM + "Kernel.rb" + ANSI_RESET + "                  *");
+            System.out.println("**********************************************");
+            System.out.println("1. Login");
+            System.out.println("2. Register");  
+            System.out.println("3. Exit");
+            System.out.println("");
 
-  }
+            choice = input.nextInt();
+            switch (choice) {
+                case 1:
+                    login();
+                    break;
+                case 2:
+                    register();
+                    break;
+                case 3:
+                    System.out.println(ANSI_GREEN + "Goodbye" + ANSI_RESET);
+                    break;
+                default:
+                    System.out.println(ANSI_RED + "Invalid choice" + ANSI_RESET);
+                    break;
+            }
+        } while (choice != 3);
 
-  private static void login(){
-    Scanner input = new Scanner(System.in);
-    System.out.println("Enter your username");
-    String username = input.nextLine();
-    System.out.println("Enter your password");
-    String password = input.nextLine();
-    int loginStatus = database.checkLogin(username, password);
-    if(loginStatus == 1){
-      User user = database.getUser(loginStatus);
-      System.out.println("Welcome " + user.getUsername());
-    }else{
-      System.out.println("Invalid username or password");
-    };
-  }
-
-  private static void register(){
-    Scanner input = new Scanner(System.in);
-    System.out.println("Enter your username");
-    String username = input.nextLine();
-    System.out.println("Enter your phone number");
-    String phonenumber = input.nextLine();
-    System.out.println("Enter your email");
-    String email = input.nextLine();
-    System.out.println("Enter your password");
-    String password = input.nextLine();
-    System.out.println("Enter your password again");
-    String password2 = input.nextLine();
-    checkPassword(password, password2);
-  
-    System.out.println("1. Admin \n 2. User");
-    int  typeofuser = input.nextInt();
-    if(typeofuser == 1){
-      User admin =  new Admin(username, email, phonenumber, password);
-      database.addUser(admin);
-    }else{
-      User user = new User(username, email, phonenumber, password);
-      database.addUser(user);
-    }
-    input.close();
-  }
-
-  private static void checkPassword(String password, String password2){
-    if(password.equals(password2)){
-      System.out.println("Registration successful");
-    }else{
-      System.out.println("Passwords do not match");
+        input.close(); 
     }
 
-    if(password.length() < 8){
-      System.out.println("Password must be at least 8 characters long");
-    }
-    if (password.matches("[a-zA-Z0-9]*")){
-      System.out.println("Password must contain at least one special character");
+    private static void login() {
+        input.nextLine(); 
+        System.out.println("Enter your username:");
+        String username = input.nextLine();
+        System.out.println("Enter your password:");
+        String password = input.nextLine();
+        int loginStatus = database.checkLogin(username, password);
+        if (loginStatus == 1) {
+            User user = database.getUser(loginStatus);
+            System.out.println(ANSI_GREEN + "Welcome, " + user.getUsername() + "!" + ANSI_RESET);
+        } else {
+            System.out.println(ANSI_RED + "Invalid username or password." + ANSI_RESET);
+        }
     }
 
-  }
+    private static void register() {
+        input.nextLine(); 
+        System.out.println("Enter your username:");
+        String username = input.nextLine();
+        System.out.println("Enter your phone number:");
+        String phoneNumber = input.nextLine();
+        System.out.println("Enter your email:");
+        String email = input.nextLine();
+        String password;
+        String password2;
+        do {
+            System.out.println("Enter your password:");
+            password = input.nextLine();
+            System.out.println("Enter your password again:");
+            password2 = input.nextLine();
+            if (!checkPassword(password, password2)) {
+                System.out.println(ANSI_RED + "Passwords do not match or don't meet requirements." + ANSI_RESET);
+            }
+        } while (!checkPassword(password, password2));
 
+        System.out.println("1. Admin \n2. User");
+        int userType = input.nextInt();
+        if (userType == 1) {
+            User admin = new Admin(username, email, phoneNumber, password);
+            database.addUser(admin);
+            System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
+        } else {
+            User user = new User(username, email, phoneNumber, password);
+            database.addUser(user);
+            System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
+        }
+    }
+
+    private static boolean checkPassword(String password, String password2) {
+        if (!password.equals(password2)) {
+            return false;
+        }
+
+        if (password.length() < 8) {
+            System.out.println(ANSI_RED + "Password must be at least 8 characters long." + ANSI_RESET);
+            return false;
+        }
+        
+        if (!password.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")) {
+            System.out.println(ANSI_RED + "Password must contain at least one special character." + ANSI_RESET);
+            return false;
+        }
+        return true;
+    }
 }
