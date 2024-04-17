@@ -56,8 +56,10 @@ public class Main {
         if (loginStatus == 1) {
             User user = database.getUser(loginStatus);
             System.out.println(ANSI_GREEN + "Welcome, " + user.getUsername() + "!" + ANSI_RESET);
+            user.menu();
         } else {
             System.out.println(ANSI_RED + "Invalid username or password." + ANSI_RESET);
+            System.exit(0);
         }
     }
 
@@ -83,15 +85,17 @@ public class Main {
 
         System.out.println("1. Admin \n2. User");
         int userType = input.nextInt();
+        User user ;
         if (userType == 1) {
-            User admin = new Admin(username, email, phoneNumber, password);
-            database.addUser(admin);
+            user  = new Admin(username, email, phoneNumber, password);
+            database.addUser(user);
             System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
         } else {
-            User user = new User(username, email, phoneNumber, password);
+            user = new NormalUser(username, email, phoneNumber, password);
             database.addUser(user);
             System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
         }
+        user.menu();
     }
 
     private static boolean checkPassword(String password, String password2) {
