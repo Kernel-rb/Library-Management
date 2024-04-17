@@ -47,13 +47,8 @@ public class Database {
     String password = input.nextLine();
     System.out.println("Enter your password again");
     String password2 = input.nextLine();
-
-    if(password.equals(password2)){
-      System.out.println("Registration successful");
-    }else{
-      System.out.println("Passwords do not match");
-    }
-
+    checkPassword(password, password2);
+  
     System.out.println("1. Admin \n 2. User");
     int  typeofuser = input.nextInt();
     if(typeofuser == 1){
@@ -63,4 +58,22 @@ public class Database {
     }
     input.close(); 
   }
+
+  private static void checkPassword(String password, String password2){
+    if(password.equals(password2)){
+      System.out.println("Registration successful");
+    }else{
+      System.out.println("Passwords do not match");
+    }
+
+    if(password.length() < 8){
+      System.out.println("Password must be at least 8 characters long");
+    }
+    if (password.matches("[a-zA-Z0-9]*")){
+      System.out.println("Password must contain at least one special character");
+    }
+
+  }
+
+
 }
