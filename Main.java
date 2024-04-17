@@ -1,32 +1,40 @@
 import java.util.Scanner;
 
 public class Main {
+  static Database database;
   public static void main(String[] args){
 
-    Database database = new Database();
+    database = new Database();
+    int choice; 
+    do{
+      
+      System.out.println("Welcome to Library Management System \n" + 
+      "1. Login \n" +
+      "2. Register \n" +
+      "0. Exit \n" +
+      ""
+      );
 
-        System.out.println("Welcome to Library Management System \n "
-    + " 1 . Login \n "
-    + " 2 . Register \n "
-    + " 3 . Exit \n "
-    );
+      Scanner input = new Scanner(System.in);
+      choice = input.nextInt();
+      switch(choice){
+        case 1:
+          login();
+          break;
+        case 2:
+          register();
+          break;
+        case 0:
+          System.out.println("Goodbye");
+          System.exit(0);
+          break;
+        default:
+          System.out.println("Invalid choice");
+          break;
+      }
+    } while(choice != 0);
 
-    Scanner input = new Scanner(System.in);
-    int choice = input.nextInt();
-    switch(choice){
-      case 1 :
-      login();
-      break;
-      case 2 :
-      register();
-      break;
-      case 3 :
-      System.exit(0);
-      break;
-      default:
-      System.out.println("Invalid choice");
-    }
-    input.close(); 
+
   }
 
   private static void login(){
@@ -35,7 +43,13 @@ public class Main {
     String username = input.nextLine();
     System.out.println("Enter your password");
     String password = input.nextLine();
-    input.close(); 
+    int loginStatus = database.checkLogin(username, password);
+    if(loginStatus == 1){
+      User user = database.getUser(loginStatus);
+      System.out.println("Welcome " + user.getUsername());
+    }else{
+      System.out.println("Invalid username or password");
+    };
   }
 
   private static void register(){
@@ -55,11 +69,13 @@ public class Main {
     System.out.println("1. Admin \n 2. User");
     int  typeofuser = input.nextInt();
     if(typeofuser == 1){
-      User Admin = new Admin(username, email, phonenumber, password);
+      User admin =  new Admin(username, email, phonenumber, password);
+      database.addUser(admin);
     }else{
       User user = new User(username, email, phonenumber, password);
+      database.addUser(user);
     }
-    input.close(); 
+    input.close();
   }
 
   private static void checkPassword(String password, String password2){
