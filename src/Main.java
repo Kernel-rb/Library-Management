@@ -1,4 +1,7 @@
+package src;
 import java.util.Scanner;
+import src.User;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

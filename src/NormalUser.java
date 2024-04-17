@@ -1,3 +1,5 @@
+package src;
+import User;
 public class NormalUser extends User {
     public NormalUser(String username){
         super(username);
