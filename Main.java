@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
     static Database database;
@@ -14,13 +17,14 @@ public class Main {
     public static void main(String[] args) {
         database = new Database();
         input = new Scanner(System.in);
+        String version = getVersionFromFile("version.txt"); 
 
         int choice;
         do {
             if (!loggedIn) {
                 System.out.println("**********************************************");
                 System.out.println("*  " + ANSI_CUSTOM + "Welcome to the Library Management System" + ANSI_RESET + "  *");
-                System.out.println("*            Version: " + ANSI_CUSTOM + "0.0.1" + ANSI_RESET + "                  *");
+                System.out.println("*            Version: " + ANSI_CUSTOM + version + ANSI_RESET + "                  *");
                 System.out.println("*         Author: " + ANSI_CUSTOM + "Kernel.rb" + ANSI_RESET + "                  *");
                 System.out.println("**********************************************");
                 System.out.println("1. Login");
@@ -48,6 +52,15 @@ public class Main {
 
         input.close(); 
     }
+
+    private static String getVersionFromFile(String filename) {
+      try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+          return br.readLine();
+      } catch (IOException e) {
+          e.printStackTrace();
+          return "Could not read version from file."; 
+      }
+  }
 
     private static void login() {
         input.nextLine(); 
