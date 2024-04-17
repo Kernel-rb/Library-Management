@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args){
+
+    Database database = new Database();
+
         System.out.println("Welcome to Library Management System \n "
     + " 1 . Login \n "
     + " 2 . Register \n "
