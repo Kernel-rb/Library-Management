@@ -4,29 +4,32 @@ public class User {
   protected String phonenumber;
   protected String password;
 
-  // Constructor : 
-  public User(String username   , String email , String phonenumber , String password){
-    this.username = username;
-    this.email = email;
-    this.phonenumber = phonenumber;
-    this.password = password;
+  public User() {
+  }
+  public User(String username) {
+      this.username = username;
+  }
+  public User(String username , String email, String phonenumber, String password) {
+      this.username = username;
+      this.email = email;
+      this.phonenumber = phonenumber;
+      this.password = password;
   }
 
-  // Getter methods : 
-  public String getUsername(){
-    return username;
-  }
-  public String getEmail(){
-    return email;
+  // Getter methods :
+  public String getUsername() {
+      return username;
   }
 
-  public String getPhoneNumber(){
-    return phonenumber;
+  public String getEmail() {
+      return email;
   }
 
-  public String getPassword(){
-    return password;
+  public String getPhoneNumber() {
+      return phonenumber;
   }
 
-
+  public String getPassword() {
+      return password;
+  }
 }
