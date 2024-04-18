@@ -62,6 +62,7 @@ public class Main {
         input.close(); 
     }
 
+    // Version method
     private static String getVersionFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             return br.readLine();
@@ -70,9 +71,7 @@ public class Main {
             return "Could not read version from file."; 
         }
     }
-
-    
-    
+    // Login method
     private static void login() {
         input.nextLine(); 
         System.out.println("Enter your username:");
@@ -92,7 +91,7 @@ public class Main {
             System.exit(0);
         }
     }
-
+    // Register method
     private static void register() {
         input.nextLine(); 
         String username;
@@ -157,6 +156,7 @@ public class Main {
         loggedIn = true; 
     }
     
+    // About method
     private static void about() {
         System.out.println(ANSI_BLUE + "This program is a library management system.");
         System.out.println("It allows users to borrow and return books.");
@@ -177,7 +177,6 @@ public class Main {
         forbiddenNames.add("login");
         forbiddenNames.add("register");
     }
-
     private static ArrayList<String> forbiddenNames = new ArrayList<String>();
     static {
         forbiddenNames.add("admin");
@@ -188,7 +187,8 @@ public class Main {
         forbiddenNames.add("login");
         forbiddenNames.add("register");
     }
-
+    
+    // Check username method
     private static boolean checkUserName(String username) {
         if(username.length() < 3) {
             System.out.println(ANSI_RED + "Username must be at least 3 characters long." + ANSI_RESET);
@@ -201,6 +201,7 @@ public class Main {
         return true;
     }
     
+    // Check phone number method
     private static boolean checkPhoneNumber(String phoneNumber) {
         if(phoneNumber.length() > 10) {
             return false;
@@ -211,6 +212,7 @@ public class Main {
         return true;
     }
 
+    // Check email method
     private static boolean checkEmail(String email) {
         if(email.contains("@") && email.contains(".")) {
             return true;
@@ -224,6 +226,7 @@ public class Main {
         return false;
     }
 
+    // Check password method
     private static boolean checkPassword(String password, String password2) {
         if (!password.equals(password2)) {
             return false;
@@ -239,6 +242,7 @@ public class Main {
         return true;
     }
 
+    // Check if input is equal to exit
     private static void checkIfInputEqualToExit(String input) {
         if(input.equals("exit")) {
             System.out.println(ANSI_GREEN + "Goodbye" + ANSI_RESET);
