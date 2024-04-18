@@ -104,7 +104,7 @@ public class Main {
             username = input.nextLine();
             if (username.equalsIgnoreCase("exit")) {
                 System.out.println(ANSI_GREEN + "Registration canceled. Goodbye." + ANSI_RESET);
-                return; // Exit the method
+                return;
             }
             if (!checkUserName(username)) {
                 System.out.println(ANSI_RED + "Invalid username." + ANSI_RESET);
