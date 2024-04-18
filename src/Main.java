@@ -69,8 +69,10 @@ public class Main {
         input.nextLine(); 
         System.out.println("Enter your username:");
         String username = input.nextLine();
+        checkIfInputEqualToExit(username);
         System.out.println("Enter your password:");
         String password = input.nextLine();
+        checkIfInputEqualToExit(password);
         int loginStatus = database.checkLogin(username, password);
         if (loginStatus == 1) { 
             User user = database.getUser(loginStatus);
@@ -92,19 +94,26 @@ public class Main {
         do {
             System.out.println("Enter your username:");
             username = input.nextLine();
+            checkIfInputEqualToExit(username);
+            if (!checkUserName(username)) {
+                System.out.println(ANSI_RED + "Invalid username." + ANSI_RESET);
+            }
         } while (!checkUserName(username));
 
         do {
             System.out.println("Enter your phone number:");
             phoneNumber = input.nextLine();
+            checkIfInputEqualToExit(phoneNumber);
             if (!checkPhoneNumber(phoneNumber)) {
                 System.out.println(ANSI_RED + "Invalid phone number." + ANSI_RESET);
             }
+            
         } while (!checkPhoneNumber(phoneNumber));
         String email;
         do{
             System.out.println("Enter your email:");
             email = input.nextLine();
+            checkIfInputEqualToExit(email);
             if(!checkEmail(email)){
                 System.out.println(ANSI_RED + "Invalid email." + ANSI_RESET);
             }
@@ -113,8 +122,10 @@ public class Main {
         do {
             System.out.println("Enter your password:");
             password = input.nextLine();
+            checkIfInputEqualToExit(password);
             System.out.println("Enter your password again:");
             password2 = input.nextLine();
+            checkIfInputEqualToExit(password2);
             if (!checkPassword(password, password2)) {
                 System.out.println(ANSI_RED + "Passwords do not match or don't meet requirements." + ANSI_RESET);
             }
@@ -160,10 +171,12 @@ public class Main {
     }
 
     private static boolean checkUserName(String username) {
-        if (username.length() < 5) {
+        if(username.length() < 3){
+            System.out.println(ANSI_RED + "Username must be at least 3 characters long." + ANSI_RESET);
             return false;
         }
         if (forbiddenNames.contains(username)) {
+            System.out.println(ANSI_RED + "Username is not allowed." + ANSI_RESET);
             return false;
         }
         return true;
@@ -213,6 +226,10 @@ public class Main {
         return true;
     }
 
-
-
+    private static void checkIfInputEqualToExit(String input) {
+        if(input.equals("exit")) {
+            System.out.println(ANSI_GREEN + "Goodbye" + ANSI_RESET);
+            System.exit(0);
+        }
+    }
 }   
