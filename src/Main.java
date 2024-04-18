@@ -3,6 +3,8 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
 
 public class Main {
     static Database database;
@@ -70,7 +72,7 @@ public class Main {
         System.out.println("Enter your password:");
         String password = input.nextLine();
         int loginStatus = database.checkLogin(username, password);
-        if (loginStatus == 1) {
+        if (loginStatus == 1) { 
             User user = database.getUser(loginStatus);
             System.out.println(ANSI_GREEN + "Welcome, " + user.getUsername() + "!" + ANSI_RESET);
             user.menu();
@@ -83,14 +85,31 @@ public class Main {
 
     private static void register() {
         input.nextLine(); 
-        System.out.println("Enter your username:");
-        String username = input.nextLine();
-        System.out.println("Enter your phone number:");
-        String phoneNumber = input.nextLine();
-        System.out.println("Enter your email:");
-        String email = input.nextLine();
+        String username;
+        String phoneNumber; 
         String password;
         String password2;
+        do {
+            System.out.println("Enter your username:");
+            username = input.nextLine();
+        } while (!checkUserName(username));
+
+        do {
+            System.out.println("Enter your phone number:");
+            phoneNumber = input.nextLine();
+            if (!checkPhoneNumber(phoneNumber)) {
+                System.out.println(ANSI_RED + "Invalid phone number." + ANSI_RESET);
+            }
+        } while (!checkPhoneNumber(phoneNumber));
+        String email;
+        do{
+            System.out.println("Enter your email:");
+            email = input.nextLine();
+            if(!checkEmail(email)){
+                System.out.println(ANSI_RED + "Invalid email." + ANSI_RESET);
+            }
+        }while(!checkEmail(email));
+
         do {
             System.out.println("Enter your password:");
             password = input.nextLine();
@@ -117,6 +136,66 @@ public class Main {
         loggedIn = true; 
     }
 
+    static {
+        ArrayList<String> forbiddenNames = new ArrayList<String>();
+        forbiddenNames.add("admin");
+        forbiddenNames.add("root");
+        forbiddenNames.add("superuser");
+        forbiddenNames.add("user");
+        forbiddenNames.add("username");
+        forbiddenNames.add("login");
+        forbiddenNames.add("register");
+    }
+
+    private static ArrayList<String> forbiddenNames = new ArrayList<String>();
+
+    static {
+        forbiddenNames.add("admin");
+        forbiddenNames.add("root");
+        forbiddenNames.add("superuser");
+        forbiddenNames.add("user");
+        forbiddenNames.add("username");
+        forbiddenNames.add("login");
+        forbiddenNames.add("register");
+    }
+
+    private static boolean checkUserName(String username) {
+        if (username.length() < 5) {
+            return false;
+        }
+        if (forbiddenNames.contains(username)) {
+            return false;
+        }
+        return true;
+    }
+    
+    private static boolean checkPhoneNumber(String phoneNumber){
+        if(phoneNumber.length() > 10){
+            return false;
+        }
+
+        if(!phoneNumber.matches("[0-9]+")){
+            return false;
+        }
+        return true;
+    }
+
+
+    private static  boolean checkEmail(String email){
+        if(email.contains("@") && email.contains(".")){
+            return true;
+        }
+
+        if(email.length() < 5){
+            return false;
+        }
+
+        if(email.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")){
+            return false;
+        }
+        return false;
+    }
+
     private static boolean checkPassword(String password, String password2) {
         if (!password.equals(password2)) {
             return false;
@@ -133,4 +212,7 @@ public class Main {
         }
         return true;
     }
-}
+
+
+
+}   
