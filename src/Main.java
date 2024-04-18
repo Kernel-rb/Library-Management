@@ -1,21 +1,23 @@
 package src;
+
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class Main {
     static Database database;
     static Scanner input;
     static boolean loggedIn = false;
 
-    // !bach nchanger les colr dyal output 
+    // Colors dyal Output
     public static final String ANSI_CUSTOM = "\u001B[38;5;208m"; // Orange 
     public static final String ANSI_RESET = "\u001B[0m"; // RESET
     public static final String ANSI_RED = "\u001B[31m"; // RED
     public static final String ANSI_GREEN = "\u001B[32m"; // GREEN
+    public static final String ANSI_BLUE = "\u001B[34m"; // BLUE
+
 
     public static void main(String[] args) {
         database = new Database();
@@ -33,6 +35,7 @@ public class Main {
                 System.out.println("1. Login");
                 System.out.println("2. Register");  
                 System.out.println("3. Exit");
+                System.out.println("4. Info about the program");  
                 System.out.println("");
             }
 
@@ -47,6 +50,9 @@ public class Main {
                 case 3:
                     System.out.println(ANSI_GREEN + "Goodbye" + ANSI_RESET);
                     break;
+                case 4:
+                    about();
+                    break;
                 default:
                     System.out.println(ANSI_RED + "Invalid choice" + ANSI_RESET);
                     break;
@@ -57,14 +63,16 @@ public class Main {
     }
 
     private static String getVersionFromFile(String filename) {
-      try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-          return br.readLine();
-      } catch (IOException e) {
-          e.printStackTrace();
-          return "Could not read version from file."; 
-      }
-  }
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            return br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Could not read version from file."; 
+        }
+    }
 
+    
+    
     private static void login() {
         input.nextLine(); 
         System.out.println("Enter your username:");
@@ -92,9 +100,12 @@ public class Main {
         String password;
         String password2;
         do {
-            System.out.println("Enter your username:");
+            System.out.println("Enter your username (type 'exit' to cancel):");
             username = input.nextLine();
-            checkIfInputEqualToExit(username);
+            if (username.equalsIgnoreCase("exit")) {
+                System.out.println(ANSI_GREEN + "Registration canceled. Goodbye." + ANSI_RESET);
+                return; // Exit the method
+            }
             if (!checkUserName(username)) {
                 System.out.println(ANSI_RED + "Invalid username." + ANSI_RESET);
             }
@@ -107,17 +118,16 @@ public class Main {
             if (!checkPhoneNumber(phoneNumber)) {
                 System.out.println(ANSI_RED + "Invalid phone number." + ANSI_RESET);
             }
-            
         } while (!checkPhoneNumber(phoneNumber));
         String email;
-        do{
+        do {
             System.out.println("Enter your email:");
             email = input.nextLine();
             checkIfInputEqualToExit(email);
-            if(!checkEmail(email)){
+            if (!checkEmail(email)) {
                 System.out.println(ANSI_RED + "Invalid email." + ANSI_RESET);
             }
-        }while(!checkEmail(email));
+        } while (!checkEmail(email));
 
         do {
             System.out.println("Enter your password:");
@@ -146,7 +156,17 @@ public class Main {
         user.menu();
         loggedIn = true; 
     }
+    
+    private static void about() {
+        System.out.println(ANSI_BLUE + "This program is a library management system.");
+        System.out.println("It allows users to borrow and return books.");
+        System.out.println("It also allows admins to add, remove, and edit books.");
+        System.out.println("It was created by Kernel.rb.");
+        System.out.println("Version: 0.0.1" + ANSI_RESET); 
+        System.exit(0);
+    }
 
+    // Array of forbidden usernames
     static {
         ArrayList<String> forbiddenNames = new ArrayList<String>();
         forbiddenNames.add("admin");
@@ -159,7 +179,6 @@ public class Main {
     }
 
     private static ArrayList<String> forbiddenNames = new ArrayList<String>();
-
     static {
         forbiddenNames.add("admin");
         forbiddenNames.add("root");
@@ -171,7 +190,7 @@ public class Main {
     }
 
     private static boolean checkUserName(String username) {
-        if(username.length() < 3){
+        if(username.length() < 3) {
             System.out.println(ANSI_RED + "Username must be at least 3 characters long." + ANSI_RESET);
             return false;
         }
@@ -182,29 +201,25 @@ public class Main {
         return true;
     }
     
-    private static boolean checkPhoneNumber(String phoneNumber){
-        if(phoneNumber.length() > 10){
+    private static boolean checkPhoneNumber(String phoneNumber) {
+        if(phoneNumber.length() > 10) {
             return false;
         }
-
-        if(!phoneNumber.matches("[0-9]+")){
+        if(!phoneNumber.matches("[0-9]+")) {
             return false;
         }
         return true;
     }
 
-
-    private static  boolean checkEmail(String email){
-        if(email.contains("@") && email.contains(".")){
+    private static boolean checkEmail(String email) {
+        if(email.contains("@") && email.contains(".")) {
             return true;
         }
-
-        if(email.length() < 5){
+        if(email.length() < 5) {
             return false;
         }
-
-        if(email.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")){
-            return false;
+        if(email.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")) {
+            return false; 
         }
         return false;
     }
@@ -213,12 +228,10 @@ public class Main {
         if (!password.equals(password2)) {
             return false;
         }
-
         if (password.length() < 8) {
             System.out.println(ANSI_RED + "Password must be at least 8 characters long." + ANSI_RESET);
             return false;
         }
-        
         if (!password.matches(".*[!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?].*")) {
             System.out.println(ANSI_RED + "Password must contain at least one special character." + ANSI_RESET);
             return false;
@@ -232,4 +245,4 @@ public class Main {
             System.exit(0);
         }
     }
-}   
+}
