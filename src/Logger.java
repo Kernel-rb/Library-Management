@@ -8,8 +8,8 @@ import java.util.Date;
 
 public class Logger {
     private static final String LOG_DIR = "logs";
-    private static final String LOG_FILE = LOG_DIR + File.separator + "logfile.txt";
-    
+    private static final String LOG_FILE = LOG_DIR + File.separator + "logfile.log";
+
     public static void log(String message) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String formattedDate = dateFormat.format(new Date());
@@ -17,15 +17,18 @@ public class Logger {
         String osDetails = System.getProperty("os.name") + " " +
                            System.getProperty("os.arch") + " " +
                            System.getProperty("os.version");
+
         try {
             File directory = new File(LOG_DIR);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
             try (PrintWriter writer = new PrintWriter(new FileWriter(LOG_FILE, true))) {
-                writer.println("Timestamp: " + formattedDate);
-                writer.println("Operating System: " + osDetails);
-                writer.println("Message: " + message);
+                if (message.startsWith("[ERROR]")) {
+                    writer.println(formattedDate + " - " + osDetails + " - [ERROR] " + message);
+                } else {
+                    writer.println(formattedDate + " - " + osDetails + " - " + message);
+                }
                 writer.println("--------------------------------------------");
             }
         } catch (IOException e) {
