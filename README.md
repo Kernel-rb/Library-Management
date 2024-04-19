@@ -11,30 +11,35 @@ This is a simple Library Management System implemented in Java. It allows users 
 
 ## Installation
 1. Clone the repository:
-    ```
+    ```bash
     git clone https://github.com/Kernel-rb/Library-Management.git
     ```
 2. Compile the Java files:
-    ```
-    javac src/*.java
+    ```bash
+    cd Library-Management
+    sh run.sh
     ```
 
 ## Usage
 1. Navigate to the project directory:
-    ```
+    ```bash
     cd Library-Management
     ```
 2. Run the Main class:
-    ```
+    ```bash
     java src.Main
     ```
-3. Follow the on-screen instructions to use the Library Management System.
+3. Follow the on-screen instructions to use the Library Management System. You can register as a new user, login, and perform various library management tasks.
 
-## Version
-The current version of the application is 0.0.1. The version number is stored in the "version.txt" file.
+## Testing
 
-## Contributors
-- Kernel.rb
+-- Testing is in progress --
+
+## Contributing
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request. 
+
+## Author
+- Side project as a Student : Kernel-rb
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. 
