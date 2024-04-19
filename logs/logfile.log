@@ -1,46 +1,40 @@
-2024-04-19 17:57:48 - Windows 11 amd64 10.0 - Welcome to the Library Management System
+2024-04-19 18:06:51 - Windows 11 amd64 10.0 - [INFO] Welcome to the Library Management System
 --------------------------------------------
-2024-04-19 17:57:48 - Windows 11 amd64 10.0 - Version: 0.0.1
+2024-04-19 18:06:51 - Windows 11 amd64 10.0 - [INFO] Version: 0.0.1
 --------------------------------------------
-2024-04-19 17:57:48 - Windows 11 amd64 10.0 - Author: Kernel.rb
+2024-04-19 18:06:51 - Windows 11 amd64 10.0 - [INFO] Author: Kernel.rb
 --------------------------------------------
-2024-04-19 17:57:52 - Windows 11 amd64 10.0 - Invalid login attempt for user: kernel
+2024-04-19 18:06:53 - Windows 11 amd64 10.0 - [INFO] Showing program information
 --------------------------------------------
-2024-04-19 17:58:00 - Windows 11 amd64 10.0 - Welcome to the Library Management System
+2024-04-19 18:06:58 - Windows 11 amd64 10.0 - [INFO] Welcome to the Library Management System
 --------------------------------------------
-2024-04-19 17:58:00 - Windows 11 amd64 10.0 - Version: 0.0.1
+2024-04-19 18:06:58 - Windows 11 amd64 10.0 - [INFO] Version: 0.0.1
 --------------------------------------------
-2024-04-19 17:58:00 - Windows 11 amd64 10.0 - Author: Kernel.rb
+2024-04-19 18:06:58 - Windows 11 amd64 10.0 - [INFO] Author: Kernel.rb
 --------------------------------------------
-2024-04-19 18:04:13 - Windows 11 amd64 10.0 - Welcome to the Library Management System
+2024-04-19 18:07:02 - Windows 11 amd64 10.0 - [INFO] Invalid login attempt for user: kernel
 --------------------------------------------
-2024-04-19 18:04:13 - Windows 11 amd64 10.0 - Version: 0.0.1
+2024-04-19 18:07:10 - Windows 11 amd64 10.0 - [INFO] Welcome to the Library Management System
 --------------------------------------------
-2024-04-19 18:04:13 - Windows 11 amd64 10.0 - Author: Kernel.rb
+2024-04-19 18:07:10 - Windows 11 amd64 10.0 - [INFO] Version: 0.0.1
 --------------------------------------------
-2024-04-19 18:04:17 - Windows 11 amd64 10.0 - Showing program information
+2024-04-19 18:07:10 - Windows 11 amd64 10.0 - [INFO] Author: Kernel.rb
 --------------------------------------------
-2024-04-19 18:04:22 - Windows 11 amd64 10.0 - Welcome to the Library Management System
+2024-04-19 18:07:11 - Windows 11 amd64 10.0 - [INFO] Exiting the program
 --------------------------------------------
-2024-04-19 18:04:22 - Windows 11 amd64 10.0 - Version: 0.0.1
+2024-04-19 18:07:14 - Windows 11 amd64 10.0 - [INFO] Welcome to the Library Management System
 --------------------------------------------
-2024-04-19 18:04:22 - Windows 11 amd64 10.0 - Author: Kernel.rb
+2024-04-19 18:07:14 - Windows 11 amd64 10.0 - [INFO] Version: 0.0.1
 --------------------------------------------
-2024-04-19 18:04:23 - Windows 11 amd64 10.0 - You must enter a number [1-4]
+2024-04-19 18:07:14 - Windows 11 amd64 10.0 - [INFO] Author: Kernel.rb
 --------------------------------------------
-2024-04-19 18:04:23 - Windows 11 amd64 10.0 - Welcome to the Library Management System
+2024-04-19 18:07:27 - Windows 11 amd64 10.0 - [INFO] Invalid email entered during registration
 --------------------------------------------
-2024-04-19 18:04:23 - Windows 11 amd64 10.0 - Version: 0.0.1
+2024-04-19 18:07:40 - Windows 11 amd64 10.0 - [INFO] Admin registered: kernerl.rb
 --------------------------------------------
-2024-04-19 18:04:23 - Windows 11 amd64 10.0 - Author: Kernel.rb
+2024-04-19 18:07:43 - Windows 11 amd64 10.0 - [INFO] Invalid choice entered
 --------------------------------------------
-2024-04-19 18:04:28 - Windows 11 amd64 10.0 - Invalid choice entered
+2024-04-19 18:07:47 - Windows 11 amd64 10.0 - [INFO] You must enter a number [1-4]
 --------------------------------------------
-2024-04-19 18:04:28 - Windows 11 amd64 10.0 - Welcome to the Library Management System
---------------------------------------------
-2024-04-19 18:04:28 - Windows 11 amd64 10.0 - Version: 0.0.1
---------------------------------------------
-2024-04-19 18:04:28 - Windows 11 amd64 10.0 - Author: Kernel.rb
---------------------------------------------
-2024-04-19 18:04:34 - Windows 11 amd64 10.0 - Exiting the program
+2024-04-19 18:07:49 - Windows 11 amd64 10.0 - [INFO] You must enter a number [1-4]
 --------------------------------------------
