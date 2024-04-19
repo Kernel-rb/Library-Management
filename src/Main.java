@@ -96,6 +96,7 @@ public class Main {
         input.nextLine(); 
         String username;
         String phoneNumber; 
+        String email;
         String password;
         String password2;
         do {
@@ -103,6 +104,7 @@ public class Main {
             username = input.nextLine();
             if (username.equalsIgnoreCase("exit")) {
                 System.out.println(ANSI_GREEN + "Registration canceled. Goodbye." + ANSI_RESET);
+                System.exit(0);
                 return;
             }
             if (!checkUserName(username)) {
@@ -118,7 +120,6 @@ public class Main {
                 System.out.println(ANSI_RED + "Invalid phone number." + ANSI_RESET);
             }
         } while (!checkPhoneNumber(phoneNumber));
-        String email;
         do {
             System.out.println("Enter your email:");
             email = input.nextLine();
