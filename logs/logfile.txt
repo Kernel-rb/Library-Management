@@ -1,0 +1,16 @@
+Timestamp: 2024-04-19 17:50:56
+Operating System: Windows 11 amd64 10.0
+Message: Welcome to the Library Management System
+--------------------------------------------
+Timestamp: 2024-04-19 17:50:56
+Operating System: Windows 11 amd64 10.0
+Message: Version: 0.0.1
+--------------------------------------------
+Timestamp: 2024-04-19 17:50:56
+Operating System: Windows 11 amd64 10.0
+Message: Author: Kernel.rb
+--------------------------------------------
+Timestamp: 2024-04-19 17:50:59
+Operating System: Windows 11 amd64 10.0
+Message: Showing program information
+--------------------------------------------

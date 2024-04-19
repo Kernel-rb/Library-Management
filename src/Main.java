@@ -18,6 +18,8 @@ public class Main {
     public static final String ANSI_GREEN = "\u001B[32m"; // GREEN
     public static final String ANSI_BLUE = "\u001B[34m"; // BLUE
 
+    // Import Logger
+    static Logger logger = new Logger();
 
     public static void main(String[] args) {
         database = new Database();
@@ -27,6 +29,10 @@ public class Main {
         int choice;
         do {
             if (!loggedIn) {
+                Logger.log("Welcome to the Library Management System");
+                Logger.log("Version: " + version);
+                Logger.log("Author: Kernel.rb");
+
                 System.out.println("**********************************************");
                 System.out.println("*  " + ANSI_CUSTOM + "Welcome to the Library Management System" + ANSI_RESET + "  *");
                 System.out.println("*            Version: " + ANSI_CUSTOM + version + ANSI_RESET + "                  *");
@@ -48,12 +54,14 @@ public class Main {
                     register();
                     break;
                 case 3:
+                    Logger.log("Exiting the program");
                     System.out.println(ANSI_GREEN + "Goodbye" + ANSI_RESET);
                     break;
                 case 4:
                     about();
                     break;
                 default:
+                    Logger.log("Invalid choice entered");
                     System.out.println(ANSI_RED + "Invalid choice" + ANSI_RESET);
                     break;
             }
@@ -67,10 +75,11 @@ public class Main {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             return br.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.log("Failed to read version from file: " + e.getMessage());
             return "Could not read version from file."; 
         }
     }
+    
     // Login method
     private static void login() {
         input.nextLine(); 
@@ -87,10 +96,12 @@ public class Main {
             user.menu();
             loggedIn = true; 
         } else {
+            Logger.log("Invalid login attempt for user: " + username);
             System.out.println(ANSI_RED + "Invalid username or password." + ANSI_RESET);
             System.exit(0);
         }
     }
+    
     // Register method
     private static void register() {
         input.nextLine(); 
@@ -103,11 +114,13 @@ public class Main {
             System.out.println("Enter your username (type 'exit' to cancel):");
             username = input.nextLine();
             if (username.equalsIgnoreCase("exit")) {
+                Logger.log("Registration canceled");
                 System.out.println(ANSI_GREEN + "Registration canceled. Goodbye." + ANSI_RESET);
                 System.exit(0);
                 return;
             }
             if (!checkUserName(username)) {
+                Logger.log("Invalid username entered during registration");
                 System.out.println(ANSI_RED + "Invalid username." + ANSI_RESET);
             }
         } while (!checkUserName(username));
@@ -117,14 +130,17 @@ public class Main {
             phoneNumber = input.nextLine();
             checkIfInputEqualToExit(phoneNumber);
             if (!checkPhoneNumber(phoneNumber)) {
+                Logger.log("Invalid phone number entered during registration");
                 System.out.println(ANSI_RED + "Invalid phone number." + ANSI_RESET);
             }
         } while (!checkPhoneNumber(phoneNumber));
+        
         do {
             System.out.println("Enter your email:");
             email = input.nextLine();
             checkIfInputEqualToExit(email);
             if (!checkEmail(email)) {
+                Logger.log("Invalid email entered during registration");
                 System.out.println(ANSI_RED + "Invalid email." + ANSI_RESET);
             }
         } while (!checkEmail(email));
@@ -137,6 +153,7 @@ public class Main {
             password2 = input.nextLine();
             checkIfInputEqualToExit(password2);
             if (!checkPassword(password, password2)) {
+                Logger.log("Passwords do not match or don't meet requirements during registration");
                 System.out.println(ANSI_RED + "Passwords do not match or don't meet requirements." + ANSI_RESET);
             }
         } while (!checkPassword(password, password2));
@@ -147,10 +164,12 @@ public class Main {
         if (userType == 1) {
             user  = new Admin(username, email, phoneNumber, password);
             database.addUser(user);
+            Logger.log("Admin registered: " + username);
             System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
         } else {
             user = new NormalUser(username, email, phoneNumber, password);
             database.addUser(user);
+            Logger.log("User registered: " + username);
             System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
         }
         user.menu();
@@ -159,6 +178,7 @@ public class Main {
     
     // About method
     private static void about() {
+        Logger.log("Showing program information");
         System.out.println(ANSI_BLUE + "This program is a library management system.");
         System.out.println("It allows users to borrow and return books.");
         System.out.println("It also allows admins to add, remove, and edit books.");
@@ -246,6 +266,7 @@ public class Main {
     // Check if input is equal to exit
     private static void checkIfInputEqualToExit(String input) {
         if(input.equals("exit")) {
+            Logger.log("Exiting the program");
             System.out.println(ANSI_GREEN + "Goodbye" + ANSI_RESET);
             System.exit(0);
         }
