@@ -12,14 +12,12 @@ This is a simple Library Management System implemented in Java. It allows users 
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Kernel-rb/Library-Management.git
+    git clone https://github.com/Kernel-rb/Library-Management.git && cd Library-Management
     ```
-2. Compile the Java files:
+2. Run the `run.sh` script to compile the Java files:
     ```bash
-    cd Library-Management
     sh run.sh
     ```
-
 ## Usage
 1. Navigate to the project directory:
     ```bash
