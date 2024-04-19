@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Function to print colorful ASCII Art for Kernel Launcher
 print_kernel_launcher() {
     echo -e "\033[1;35m   ____       __ __ __________  _   __________ \033[0m"
     echo -e "\033[1;35m  / __ \_  __/ //_// ____/ __ \/ | / / ____/ / \033[0m"
@@ -11,7 +10,7 @@ print_kernel_launcher() {
     echo -e "\033[0;36m                                                                                              \033[0m"
 }
 
-# Function to print colorful message
+# Function to print colored messages
 print_message() {
     local color="$1"
     local message="$2"
@@ -22,7 +21,7 @@ print_message() {
 LOG_DIR="logs"
 LOG_FILE="$LOG_DIR/bashsrc_logs.log"
 
-# Function to log messages to both stdout and log file
+# Log function to log messages to a log file
 log_message() {
     local message="$1"
     local timestamp=$(date +"%Y-%m-%d %T")
@@ -30,7 +29,7 @@ log_message() {
     echo "$timestamp - $message" >> "$LOG_FILE"
 }
 
-# Main script logic
+# Main function
 main() {
     print_kernel_launcher
     print_message "" "Starting script execution..."
