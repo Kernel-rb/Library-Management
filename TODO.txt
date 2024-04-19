@@ -1,3 +1,1 @@
-- add Logs to the list of available resources
-- finish the implementation of the Logs resource
-- add the Logs resource to the list of available resources
+- add Logs to the list of available resources  ☕
