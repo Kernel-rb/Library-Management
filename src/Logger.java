@@ -10,13 +10,23 @@ public class Logger {
     private static final String LOG_DIR = "logs";
     private static final String LOG_FILE = LOG_DIR + File.separator + "logfile.log";
 
+    public enum LogLevel {
+        INFO, WARNING, ERROR
+    }
+
     public static void log(String message) {
+        log(message, LogLevel.INFO);
+    }
+
+    public static void log(String message, LogLevel level) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String formattedDate = dateFormat.format(new Date());
 
         String osDetails = System.getProperty("os.name") + " " +
-                           System.getProperty("os.arch") + " " +
-                           System.getProperty("os.version");
+                System.getProperty("os.arch") + " " +
+                System.getProperty("os.version");
+
+        String logMessage = formattedDate + " - " + osDetails + " - [" + level + "] " + message;
 
         try {
             File directory = new File(LOG_DIR);
@@ -24,15 +34,16 @@ public class Logger {
                 directory.mkdirs();
             }
             try (PrintWriter writer = new PrintWriter(new FileWriter(LOG_FILE, true))) {
-                if (message.startsWith("[ERROR]")) {
-                    writer.println(formattedDate + " - " + osDetails + " - [ERROR] " + message);
-                } else {
-                    writer.println(formattedDate + " - " + osDetails + " - " + message);
-                }
+                writer.println(logMessage);
                 writer.println("--------------------------------------------");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void logException(Exception exception) {
+        log("Exception occurred: " + exception.getMessage(), LogLevel.ERROR);
+        exception.printStackTrace();
     }
 }
