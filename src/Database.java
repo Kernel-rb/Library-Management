@@ -18,20 +18,13 @@ public class Database {
 
     public Database() {
         try {
-            // Load resources from the "data" directory
             InputStream usersStream = Database.class.getClassLoader().getResourceAsStream("data/Users");
             InputStream booksStream = Database.class.getClassLoader().getResourceAsStream("data/Books");
-
-            // Create temporary directories
             usersFile = Files.createTempDirectory("Users").toFile();
             booksFile = Files.createTempDirectory("Books").toFile();
-
-            // Copy resources to temporary directories if input streams are not null
             if (usersStream != null && booksStream != null) {
                 Files.copy(usersStream, usersFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 Files.copy(booksStream, booksFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-                // Close input streams
                 usersStream.close();
                 booksStream.close();
             } else {
