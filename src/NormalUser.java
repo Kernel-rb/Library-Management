@@ -3,6 +3,17 @@ package src;
 public class NormalUser extends User {
     public NormalUser(String username){
         super(username);
+        this.operation = new Command[]{
+            new ViewProfile(),
+            new EditProfile(),
+            new ViewBooks(),
+            new PlaceOrder(),
+            new BorrowBook(),
+            new CalculateFine(),
+            new ReturnBook(),
+            new Logout(),
+            new Exit()
+        };
     }
     public NormalUser(String username, String email, String phonenumber, String password){
         super(username, email, phonenumber, password);
