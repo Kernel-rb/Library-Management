@@ -5,3 +5,4 @@ public class EditProfile implements Command {
     public void oper(){
         System.out.println("Add Book");
     }
+}
