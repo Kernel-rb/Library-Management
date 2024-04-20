@@ -1,4 +1,4 @@
 - [ ] implement Admin and User roles and permissions 
 - [ ] Use C lang to optimize the code 
 - [ ] fix exit instant on bash script
-- [ ] add more features to the bash script
+- [ ] fix logs for bash script
