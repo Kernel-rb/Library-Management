@@ -1,2 +1,2 @@
-- implement Admin and User roles and permissions ( start  => 20/04/2024 )
-- integrate C code to optimize the speed of the app 
+- [ ] implement Admin and User roles and permissions 
+- [ ] Use C lang to optimize the code 
