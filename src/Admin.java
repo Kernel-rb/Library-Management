@@ -1,7 +1,22 @@
 package src;
 public class Admin extends User {    
+
+    
     public Admin(String username){
         super(username);
+        this.operation = new Command[]{
+            new ViewProfile(), 
+            new EditProfile(),
+            new ViewBooks(), 
+            new AddBook(), 
+            new RemoveBook(),
+            new SearchBook(), 
+            new ViewOrders(),
+            new BanUser(), 
+            new DeleteAccount(),
+            new Logout(),
+            new Exit()
+        };
     }
     public Admin(String username, String email, String phonenumber, String password){
         super(username, email, phonenumber, password);

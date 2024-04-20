@@ -4,6 +4,7 @@ public abstract class  User {
   protected String email;
   protected String phonenumber;
   protected String password;
+  protected Command[] operation;
 
   public User() {
   }
