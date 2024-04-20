@@ -39,7 +39,7 @@ public class Admin extends User {
     }
 
     @Override
-    public void menu() {
+    public void menu(Database database , User user) {
         try (Scanner input = new Scanner(System.in)) {
             int choice;
             do {
@@ -61,7 +61,8 @@ public class Admin extends User {
                 if (choice < 1 || choice > this.operation.length) {
                     System.out.println("Invalid choice. Please enter a number between 1 and " + this.operation.length);
                 } else {
-                    this.operation[choice - 1].oper();
+                    this.operation[choice - 1].oper(database, user);
+                    input.close();
                 }
             } while (choice != 11);
         } catch (Exception e) {

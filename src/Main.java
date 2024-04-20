@@ -100,7 +100,7 @@
             if (loginStatus == 1) { 
                 User user = database.getUser(loginStatus);
                 System.out.println(ANSI_GREEN + "Welcome, " + user.getUsername() + "!" + ANSI_RESET);
-                user.menu();
+                user.menu( database , user);
                 loggedIn = true; 
             } else {
                 Logger.log("Invalid login attempt for user: " + username);
@@ -179,7 +179,7 @@
                 Logger.log("User registered: " + username);
                 System.out.println(ANSI_GREEN + "Registration successful!" + ANSI_RESET);
             }
-            user.menu();
+            user.menu(database , user);
             loggedIn = true; 
         }
         
