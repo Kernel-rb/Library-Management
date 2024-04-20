@@ -1,4 +1,6 @@
 package src;
+
+
 public abstract class  User {
   protected String username;
   protected String email;
@@ -23,18 +25,22 @@ public abstract class  User {
       return username;
   }
 
-  public String getEmail() {
-      return email;
-  }
+public String getEmail() {
+    return email;
+}
 
-  public String getPhoneNumber() {
-      return phonenumber;
-  }
+public String getPhoneNumber() {
+    return phonenumber;
+}
 
-  public String getPassword() {
-      return password;
-  }
+public String getPassword() {
+    return password;
+}
 
+public String toString() {
+    String userData = "Username: " + username + "\n" + "Email: " + email + "\n" + "Phone Number: " + phonenumber + "\n" + "Password: " + password.hashCode() + "\n";
+    return userData;
+} 
 
-  abstract public void menu(Database database , User user);
+abstract public void menu(Database database, User user);
 }

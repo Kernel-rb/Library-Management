@@ -54,7 +54,8 @@ main() {
         VERSION=$(<"$VERSION_FILE")
         java -cp "$BIN_DIR" src.Main
     else
-        print_message "Error: " "Compilation failed. Exiting..."
+        print_message "Error: " "Compilation failed. Waiting 10 seconds before exiting..."
+        sleep 10
     fi
 
     print_message "" "Script execution completed."

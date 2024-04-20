@@ -68,5 +68,11 @@ public class Admin extends User {
         } catch (Exception e) {
             System.out.println("An error occurred. Please try again.");
         }
+
+    }
+
+    public String toString() {
+        String userData = "Username: " + username + "\n" + "Email: " + email + "\n" + "Phone Number: " + phonenumber + "\n" + "Password: " + password.hashCode() + "\n" + "Role: Admin" + "\n";
+        return userData;
     }
 }
