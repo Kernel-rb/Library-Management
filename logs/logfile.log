@@ -370,3 +370,17 @@
 --------------------------------------------
 2024-04-20 20:42:30 - Windows 11 amd64 10.0 - [INFO] User registered: kernel_�_��&
 --------------------------------------------
+2024-04-21 15:34:07 - Windows 11 amd64 10.0 - [INFO] Welcome to the Library Management System
+--------------------------------------------
+2024-04-21 15:34:07 - Windows 11 amd64 10.0 - [INFO] Version: 0.0.1
+--------------------------------------------
+2024-04-21 15:34:07 - Windows 11 amd64 10.0 - [INFO] Author: Kernel.rb
+--------------------------------------------
+2024-04-21 15:34:23 - Windows 11 amd64 10.0 - [INFO] Invalid email entered during registration
+--------------------------------------------
+2024-04-21 15:34:30 - Windows 11 amd64 10.0 - [INFO] Passwords do not match or don't meet requirements during registration
+--------------------------------------------
+2024-04-21 15:34:35 - Windows 11 amd64 10.0 - [INFO] User registered: kernel_ab
+--------------------------------------------
+2024-04-21 15:34:37 - Windows 11 amd64 10.0 - [INFO] Exiting the program
+--------------------------------------------

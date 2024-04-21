@@ -102,4 +102,9 @@ public class Book {
     public void setBarrowcopies(int barrowcopies) {
         this.barrowcopies = barrowcopies;
     }
+
+    public String toString2(){
+        String text = title + "<N/>" + author + "<N/>" + genre + "<N/>" + publisher + "<N/>" + status + "<N/>" + String.valueOf(quantity) + "<N/>" + String.valueOf(price) + "<N/>" + String.valueOf(barrowcopies);
+        return text;
+    }
 }

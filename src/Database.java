@@ -31,10 +31,24 @@ public class Database {
         usernames.add(user.getUsername());
         saveUsers();
     }
-
-    public void addBook(Book book) {
-        books.add(book);
-        bookTitles.add(book.getTitle());
+    public boolean addBook(Book book) {
+        if (checkBookExists(book)) {
+            System.out.println("\u001B[31mBook Already Exists\u001B[0m");
+            return false;
+        } else {
+            books.add(book);
+            bookTitles.add(book.getTitle());
+            saveBooks();
+            return true;
+        }
+    }
+    public boolean checkBookExists(Book book) {
+        for (Book existingBook : books) {
+            if (existingBook.getTitle().equals(book.getTitle())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int checkLogin(String username, String password) {
@@ -66,9 +80,9 @@ public class Database {
         }
 
         if (!data.equals("") || !data.isEmpty()) {
-            String[] usersData = data.split("<NewUser>");
+            String[] usersData = data.split("<NewUser/>");
             for (String userData : usersData) {
-                String[] user = userData.split("<NewUser/>");
+                String[] user = userData.split("<N/>");
                 if (user.length == 4) { // Ensure the array has enough elements
                     if (user[3].equals("Admin")) {
                         User newUser = new Admin(user[0], user[1], user[2], user[3]);
@@ -85,12 +99,71 @@ public class Database {
     }
 
     public void saveUsers() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(usersFile))) {
-            for (User user : users) {
-                writer.println(user);
-            }
-        } catch (Exception e) {
+        String data = "";
+        for(User user : users) {
+            data += user.toString() + "<NewUser/> \n";
+        }
+        try{
+            PrintWriter writer = new PrintWriter(new FileWriter(usersFile));
+            writer.print(data);
+            writer.close();
+        }catch(Exception e){
             System.err.println(e.toString());
         }
     }
+
+
+    public void getBooks() {
+        String data = "";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(booksFile));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                data += line;
+            }
+            reader.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+
+        if (!data.equals("") || !data.isEmpty()) {
+            String[] booksData = data.split("<NewBook/>");
+            for (String bookData : booksData) {
+                Book book = parseBook(bookData);
+                books.add(book);
+                bookTitles.add(book.getTitle());
+            }
+        }
+    }
+
+    public Book parseBook(String data ){
+        String[] bookData = data.split("<N/>");
+        Book book  = new Book();
+        book.setTitle(bookData[0]);
+        book.setAuthor(bookData[1]);
+        book.setGenre(bookData[2]);
+        book.setPublisher(bookData[3]);
+        book.setQuantity(Integer.parseInt(bookData[4]));
+        book.setPrice(Double.parseDouble(bookData[5]));
+        book.setBarrowcopies(Integer.parseInt(bookData[6]));
+        return book;
+    }
+    
+
+    public void saveBooks() {
+        String data = "";
+        for(Book book : books) {
+            data += book.toString2() + "<NewBook/> \n";
+        }
+        try{
+            PrintWriter writer = new PrintWriter(new FileWriter(booksFile));
+            writer.print(data);
+            writer.close();
+        }catch(Exception e){
+            System.err.println(e.toString());
+        }
+    }
+
+
+
 }
