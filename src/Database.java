@@ -106,6 +106,16 @@ public class Database {
         }
     }
 
+    public boolean deleteUser(User user) {
+        if (users.remove(user)) {
+            usernames.remove(user.getUsername());
+            saveUsers();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void getBooks() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(booksFile));
