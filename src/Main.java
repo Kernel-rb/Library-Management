@@ -228,7 +228,7 @@
             }
             return true;
         }
-        
+
         // Check phone number method
         private static boolean checkPhoneNumber(String phoneNumber) {
             if(phoneNumber.length() > 10) {

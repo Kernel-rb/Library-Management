@@ -104,7 +104,14 @@ public class Book {
     }
 
     public String toString2(){
-        String text = title + "<N/>" + author + "<N/>" + genre + "<N/>" + publisher + "<N/>" + status + "<N/>" + String.valueOf(quantity) + "<N/>" + String.valueOf(price) + "<N/>" + String.valueOf(barrowcopies);
+        String text = "title :" + title + "<\n>" + 
+                        "author :" + author + "<\n>" + 
+                        "genre :" + genre + "<\n>" + 
+                        "publisher :" + publisher + "<\n>" + 
+                        "quantity :" + String.valueOf(quantity) + "<\n>" +
+                        "price :" + String.valueOf(price) + "<\n>" +
+                        "barrowcopies :" + String.valueOf(barrowcopies); 
+    
         return text;
     }
 }

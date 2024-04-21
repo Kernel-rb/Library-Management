@@ -1,0 +1,8 @@
+Title : kernel
+Author : kernel
+Genre : kernel
+Publisher : kernel
+Quantity : 12
+Price : 78.0
+Barrow Copies : 1
+<NewBook/> 

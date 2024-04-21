@@ -1,6 +1,6 @@
-Username: kernel_ab
+Username: kernel
 Email: kernel@gmail.com
-Phone Number: 5456432432
-Password: 246152688
-Role: Normal
-
+Phone Number: 65456435
+Password: 1107615493
+Role: Admin
+<NewUser/>

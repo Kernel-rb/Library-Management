@@ -24,6 +24,7 @@ public class Database {
             booksFile.getParentFile().mkdirs();
         }
         getUsers();
+        getBooks();
     }
 
     public void addUser(User user) {
@@ -31,6 +32,7 @@ public class Database {
         usernames.add(user.getUsername());
         saveUsers();
     }
+
     public boolean addBook(Book book) {
         if (checkBookExists(book)) {
             System.out.println("\u001B[31mBook Already Exists\u001B[0m");
@@ -42,6 +44,7 @@ public class Database {
             return true;
         }
     }
+
     public boolean checkBookExists(Book book) {
         for (Book existingBook : books) {
             if (existingBook.getTitle().equals(book.getTitle())) {
@@ -67,23 +70,12 @@ public class Database {
     }
 
     public void getUsers() {
-        String data = "";
         try {
             BufferedReader reader = new BufferedReader(new FileReader(usersFile));
             String line;
             while ((line = reader.readLine()) != null) {
-                data += line;
-            }
-            reader.close();
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
-
-        if (!data.equals("") || !data.isEmpty()) {
-            String[] usersData = data.split("<NewUser/>");
-            for (String userData : usersData) {
-                String[] user = userData.split("<N/>");
-                if (user.length == 4) { // Ensure the array has enough elements
+                String[] user = line.split("<N/>");
+                if (user.length == 4) { 
                     if (user[3].equals("Admin")) {
                         User newUser = new Admin(user[0], user[1], user[2], user[3]);
                         users.add(newUser);
@@ -95,75 +87,95 @@ public class Database {
                     }
                 }
             }
-        }
-    }
-
-    public void saveUsers() {
-        String data = "";
-        for(User user : users) {
-            data += user.toString() + "<NewUser/> \n";
-        }
-        try{
-            PrintWriter writer = new PrintWriter(new FileWriter(usersFile));
-            writer.print(data);
-            writer.close();
-        }catch(Exception e){
-            System.err.println(e.toString());
-        }
-    }
-
-
-    public void getBooks() {
-        String data = "";
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(booksFile));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                data += line;
-            }
             reader.close();
         } catch (Exception e) {
             System.err.println(e.toString());
         }
+    }
 
-        if (!data.equals("") || !data.isEmpty()) {
-            String[] booksData = data.split("<NewBook/>");
-            for (String bookData : booksData) {
-                Book book = parseBook(bookData);
-                books.add(book);
-                bookTitles.add(book.getTitle());
+
+    public void saveUsers() {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(usersFile));
+            for (User user : users) {
+                writer.println(user.toString() + "<NewUser/>");
             }
+            writer.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
         }
     }
 
-    public Book parseBook(String data ){
-        String[] bookData = data.split("<N/>");
-        Book book  = new Book();
-        book.setTitle(bookData[0]);
-        book.setAuthor(bookData[1]);
-        book.setGenre(bookData[2]);
-        book.setPublisher(bookData[3]);
-        book.setQuantity(Integer.parseInt(bookData[4]));
-        book.setPrice(Double.parseDouble(bookData[5]));
-        book.setBarrowcopies(Integer.parseInt(bookData[6]));
+    public void getBooks() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(booksFile));
+            StringBuilder data = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                data.append(line).append("\n");
+            }
+            reader.close();
+            String[] bookData = data.toString().split("<NewBook/>");
+            for (String bookLine : bookData) {
+                Book book = parseBook(bookLine);
+                books.add(book);
+                bookTitles.add(book.getTitle());
+            }
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }
+
+    public Book parseBook(String data) {
+        String[] lines = data.split("\n");
+        Book book = new Book();
+        for (String line : lines) {
+            if (!line.trim().isEmpty()) { // Skip empty lines
+                String[] parts = line.split(" : ");
+                if (parts.length == 2) {
+                    switch (parts[0].trim()) {
+                        case "Title":
+                            book.setTitle(parts[1].trim());
+                            break;
+                        case "Author":
+                            book.setAuthor(parts[1].trim());
+                            break;
+                        case "Genre":
+                            book.setGenre(parts[1].trim());
+                            break;
+                        case "Publisher":
+                            book.setPublisher(parts[1].trim());
+                            break;
+                        case "Quantity":
+                            book.setQuantity(Integer.parseInt(parts[1].trim()));
+                            break;
+                        case "Price":
+                            book.setPrice(Double.parseDouble(parts[1].trim()));
+                            break;
+                        case "Barrow Copies":
+                            book.setBarrowcopies(Integer.parseInt(parts[1].trim()));
+                            break;
+                        default:
+                            System.err.println("Unknown field: " + parts[0]);
+                    }
+                } else {
+                    System.err.println("Invalid line format: " + line);
+                }
+            }
+        }
         return book;
     }
     
 
     public void saveBooks() {
-        String data = "";
-        for(Book book : books) {
-            data += book.toString2() + "<NewBook/> \n";
-        }
-        try{
+        try {
             PrintWriter writer = new PrintWriter(new FileWriter(booksFile));
-            writer.print(data);
+            for (Book book : books) {
+                writer.println(book.toString2() + "<NewBook/>");
+            }
             writer.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.toString());
         }
     }
-
-
-
 }
