@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include <jni.h> 
+
 
 JNIEXPORT jboolean JNICALL Java_UserCheckerJNI_checkUsernameExists(JNIEnv *env, jobject obj, jstring username) {
     const char *usernameStr = (*env)->GetStringUTFChars(env, username, NULL);

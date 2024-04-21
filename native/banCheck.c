@@ -1,7 +1,7 @@
 #inlude <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include <jni.h>
+// #include <jni.h>
 
 
 int main(){
